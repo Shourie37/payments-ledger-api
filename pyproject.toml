@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "payments-ledger-api"
+version = "0.1.0"
+description = "A small payments API with a double-entry ledger, idempotency keys, and a webhook outbox. Standard library only."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Shourie Amireddy", email = "shourie3009@gmail.com" }]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[project.scripts]
+payments-ledger = "ledger.server:main"
+
+[tool.setuptools]
+packages = ["ledger"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "tests"]
+
+[tool.ruff]
+line-length = 130
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S"]
+ignore = ["S101", "S311", "S608", "B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S", "B"]
